@@ -1,1 +1,1 @@
-# codewars-training
+# javascript homework#6
