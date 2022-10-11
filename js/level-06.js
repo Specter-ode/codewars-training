@@ -65,3 +65,55 @@
 // console.log("narcissistic(1652): ", narcissistic(1652));
 
 // ----------------------------------------------------------------------------------
+
+// The goal of this exercise is to convert a string to a new string where each character in the new string is "(" if that character appears only once in the original string, or ")" if that character appears more than once in the original string. Ignore capitalization when determining if a character is a duplicate.
+// Examples
+// "din"      =>  "((("
+// "recede"   =>  "()()()"
+// "Success"  =>  ")())())"
+// "(( @"     =>  "))(("
+
+// function duplicateEncode(word) {
+//   const arr = word.toLowerCase().split("");
+//   const test = {};
+//   for (let i = 0; i < arr.length; ++i) {
+//     let symbol = arr[i];
+//     if (test[symbol] !== undefined) {
+//       test[symbol] = false;
+//     } else {
+//       test[symbol] = true;
+//     }
+//   }
+//   const result = arr
+//     .map((item) => {
+//       return test[item] ? "(" : ")";
+//     })
+//     .join("");
+//   return result;
+// }
+
+// function duplicateEncode(word) {
+//   return word
+//     .toLowerCase()
+//     .split("")
+//     .map(function (a, i, w) {
+//       return w.indexOf(a) == w.lastIndexOf(a) ? "(" : ")";
+//     })
+//     .join("");
+// }
+
+// console.log('duplicateEncode("din");: ', duplicateEncode("din"));
+// console.log('duplicateEncode("recede");: ', duplicateEncode());
+// console.log('duplicateEncode("Success");: ', duplicateEncode("Success"));
+// console.log('duplicateEncode("(( @");: ', duplicateEncode("(( @"));
+
+// const word = "Recede";
+// const arr = word.toLowerCase().split("");
+// const getCheck = arr.reduce((acc, el) => {
+//   acc[el] = (acc[el] || 0) + 1;
+//   return acc;
+// }, {});
+// console.log("getCheck: ", getCheck);
+// Консоль выводит  {r: 1, e: 3, c: 1, d: 1}
+
+// ----------------------------------------------------------------------------------
