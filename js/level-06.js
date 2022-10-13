@@ -117,3 +117,160 @@
 // Консоль выводит  {r: 1, e: 3, c: 1, d: 1}
 
 // ----------------------------------------------------------------------------------
+
+// function expandedForm(num) {
+//   const reverseNumArr = num.toString().split("").reverse();
+//   const result = reverseNumArr
+//     .map((number, i) => number * Math.pow(10, i))
+//     .filter((number) => number > 0)
+//     .reverse()
+//     .join(" + ");
+//   return result;
+// }
+
+// console.log("expandedForm(12): ", expandedForm(12));
+// Should return '10 + 2'
+// console.log("expandedForm(42): ", expandedForm(42));
+// Should return '40 + 2'
+// console.log("expandedForm(70304): ", expandedForm(70304));
+// Should return '70000 + 300 + 4'
+
+// ----------------------------------------------------------------------------------
+
+// Write a function that takes a string of parentheses, and determines if the order of the parentheses is valid. The function should return true if the string is valid, and false if it's invalid.
+
+// Examples
+// "()"              =>  true
+// ")(()))"          =>  false
+// "("               =>  false
+// "(())((()())())"  =>  true
+
+// function validParentheses(str) {
+//   const stack = [];
+//   for (let i = 0; i < str.length; i += 1) {
+//     const bracket = str[i];
+//     if (bracket === "(") {
+//       stack.push(bracket);
+//     } else {
+//       const lastEl = stack.pop();
+//       if (!lastEl) return false;
+//     }
+//   }
+//   if (stack.length > 0) return false;
+//   return true;
+// }
+
+// console.log(
+//   'validParentheses("(())((()())())"): ',
+//   validParentheses("(())((()())())")
+// );
+// console.log('validParentheses(")(()))"): ', validParentheses(")(()))"));
+
+// Второй более тяжелый вариант когда скобки разного вида
+// Examples
+// "([]([]){[()]})"   =>  true
+// ")(()))"          =>  false
+
+// function validParentheses(str) {
+//   const stack = [];
+
+//   const obj = {
+//     "(": ")",
+//     "[": "]",
+//     "{": "}",
+//   };
+
+//   for (let i = 0; i < str.length; i += 1) {
+//     const bracket = str[i];
+//     if (bracket === "(" || bracket === "[" || bracket === "{") {
+//       stack.push(bracket);
+//     } else {
+//       const lastEl = stack.pop();
+//       if (bracket !== obj[lastEl]) return false;
+//     }
+//   }
+//   if (stack.length > 0) return false;
+//   return true;
+// }
+// console.log('validParentheses("({[])}"): ', validParentheses("({[])}"));
+// console.log(
+//   'validParentheses("([]([]){[()]})"): ',
+//   validParentheses("([]([]){[()]})")
+// );
+
+// ----------------------------------------------------------------------------------
+
+// function withoutRepeat(arr) {
+//   const uniqueValues = [];
+//   for (let i = 0; i < arr.length; i++) {
+//     const currentItem = arr[i];
+//     let count = 0;
+//     console.log("currentItem: ", currentItem);
+//     for (let j = 0; j < arr.length; j++) {
+//       const testItem = arr[j];
+//       console.log("testItem: ", testItem);
+//       if (currentItem === testItem) {
+//         count += 1;
+//       }
+//     }
+//     if (count === 1) {
+//       uniqueValues.push(currentItem);
+//     }
+//   }
+//   return uniqueValues;
+// }
+
+// Второй вариант решения(без цикла в цикле)
+// function withoutRepeat(arr) {
+//   const uniqueValues = [];
+//   const obj = {};
+//   for (let i = 0; i < arr.length; i++) {
+//     const currentItem = arr[i];
+//     if (!(currentItem in obj)) {
+//       obj[currentItem] = 1;
+//     } else {
+//       obj[currentItem] += 1;
+//     }
+//   }
+//   const keys = Object.keys(obj);
+//   keys.forEach((key) => {
+//     if (obj[key] === 1) uniqueValues.push(key);
+//   });
+//   return uniqueValues;
+// }
+
+// console.log("withoutRepeat(arr): ", withoutRepeat([1, 1, 2, 3, 4, 5, 6, 6, 7, 8, 8, 8]));
+// ----------------------------------------------------------------------------------
+
+// Task
+// Given a list and a number, create a new list that contains each number of list at most N times, without reordering.
+// For example if the input number is 2, and the input list is [1,2,3,1,2,1,2,3], you take [1,2,3,1,2], drop the next [1,2] since this would lead to 1 and 2 being in the result 3 times, and then take 3, which leads to [1,2,3,1,2,3].
+// With list [20,37,20,21] and number 1, the result would be [20,37,21].
+
+function deleteNth(array, n) {
+  const resArray = [];
+  const obj = {};
+
+  for (let i = 0; i < array.length; i++) {
+    const currentEl = array[i];
+    console.log("currentEl: ", currentEl);
+    if (!(currentEl in obj)) {
+      obj[currentEl] = 1;
+      console.log("obj[currentEl]: ", obj[currentEl]);
+      resArray.push(currentEl);
+    } else {
+      if (obj[currentEl] < n) {
+        obj[currentEl] += 1;
+        resArray.push(currentEl);
+      }
+    }
+    console.log("obj: ", obj);
+  }
+  return resArray;
+}
+
+console.log("deleteNth([20,37,20,21]: ", deleteNth([20, 37, 20, 21], 1));
+console.log(
+  "deleteNth([1,2,3,1,2,1,2,3]: ",
+  deleteNth([1, 2, 3, 1, 2, 1, 2, 3], 2)
+);
