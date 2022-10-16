@@ -247,30 +247,51 @@
 // For example if the input number is 2, and the input list is [1,2,3,1,2,1,2,3], you take [1,2,3,1,2], drop the next [1,2] since this would lead to 1 and 2 being in the result 3 times, and then take 3, which leads to [1,2,3,1,2,3].
 // With list [20,37,20,21] and number 1, the result would be [20,37,21].
 
-function deleteNth(array, n) {
-  const resArray = [];
-  const obj = {};
+// function deleteNth(array, n) {
+//   const resArray = [];
+//   const obj = {};
 
-  for (let i = 0; i < array.length; i++) {
-    const currentEl = array[i];
-    console.log("currentEl: ", currentEl);
-    if (!(currentEl in obj)) {
-      obj[currentEl] = 1;
-      console.log("obj[currentEl]: ", obj[currentEl]);
-      resArray.push(currentEl);
-    } else {
-      if (obj[currentEl] < n) {
-        obj[currentEl] += 1;
-        resArray.push(currentEl);
-      }
-    }
-    console.log("obj: ", obj);
-  }
-  return resArray;
-}
+//   for (let i = 0; i < array.length; i++) {
+//     const currentEl = array[i];
+//     console.log("currentEl: ", currentEl);
+//     if (!(currentEl in obj)) {
+//       obj[currentEl] = 1;
+//       console.log("obj[currentEl]: ", obj[currentEl]);
+//       resArray.push(currentEl);
+//     } else {
+//       if (obj[currentEl] < n) {
+//         obj[currentEl] += 1;
+//         resArray.push(currentEl);
+//       }
+//     }
+//     console.log("obj: ", obj);
+//   }
+//   return resArray;
+// }
 
-console.log("deleteNth([20,37,20,21]: ", deleteNth([20, 37, 20, 21], 1));
-console.log(
-  "deleteNth([1,2,3,1,2,1,2,3]: ",
-  deleteNth([1, 2, 3, 1, 2, 1, 2, 3], 2)
-);
+// console.log("deleteNth([20,37,20,21]: ", deleteNth([20, 37, 20, 21], 1));
+// console.log(
+//   "deleteNth([1,2,3,1,2,1,2,3]: ",
+//   deleteNth([1, 2, 3, 1, 2, 1, 2, 3], 2)
+// );
+
+// ----------------------------------------------------------------------------------
+// DESCRIPTION:
+// Complete the solution so that the function will break up camel casing, using a space between words.
+
+// Example
+// "camelCasing"  =>  "camel Casing"
+// "identifier"   =>  "identifier"
+// ""             =>  ""
+// function solution(string) {
+//   return (
+//     string
+//       .split("")
+//       .map((el) => (el === el.toUpperCase() ? " " + el : el))
+// или .map((el) => (/[A-Z]/.test(el.charAt(0)) ? " " + el : el))
+//       .join("")
+//   );
+// }
+
+// console.log('solution("camelCasing"): ', solution("camelCasingTest"));
+// console.log('solution("caMelCaSingTest"): ', solution("caMelCaSingTest"));

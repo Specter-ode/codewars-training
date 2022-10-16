@@ -52,3 +52,69 @@
 // console.log("findNextSquare(625): ", findNextSquare(625));
 // console.log("findNextSquare(121): ", findNextSquare(121));
 // console.log("findNextSquare(114): ", findNextSquare(114));
+// ----------------------------------------------------------------------------------
+
+// Count the number of divisors of a positive integer n.
+// Random tests go up to n = 500000.
+
+// Examples (input --> output)
+// 4 --> 3 (1, 2, 4)
+// 5 --> 2 (1, 5)
+// 12 --> 6 (1, 2, 3, 4, 6, 12)
+// 30 --> 8 (1, 2, 3, 5, 6, 10, 15, 30)
+// Note you should only return a number, the count of divisors. The numbers between parentheses are shown only for you to see which numbers are counted in each case.
+
+// function getDivisorsCnt(n) {
+//   const arr = [];
+//   for (let i = 1; i <= n; i++) {
+//     if (n % i === 0) {
+//       arr.push(i);
+//     }
+//   }
+//   return arr.length;
+// }
+
+// console.log("(getDivisorsCnt(54), ответ = 8: ", getDivisorsCnt(54));
+// console.log("(getDivisorsCnt(10), ответ = 4: ", getDivisorsCnt(10));
+
+// ----------------------------------------------------------------------------------
+// Are the numbers in order?
+// In this Kata, your function receives an array of integers as input. Your task is to determine whether the numbers are in ascending order. An array is said to be in ascending order if there are no two adjacent integers where the left integer exceeds the right integer in value.
+// For the purposes of this Kata, you may assume that all inputs are valid, i.e. arrays containing only integers.
+// Note that an array of 0 or 1 integer(s) is automatically considered to be sorted in ascending order since all (zero) adjacent pairs of integers satisfy the condition that the left integer does not exceed the right integer in value.
+
+// For example:
+// inAscOrder([1,2,4,7,19]); // returns true
+// inAscOrder([1,2,3,4,5]); // returns true
+// inAscOrder([1,6,10,18,2,4,20]); // returns false
+// inAscOrder([9,8,7,6,5,4,3,2,1]); // returns false because the numbers are in DESCENDING order
+
+// function inAscOrder(arr) {
+//   for (let i = 0; i < arr.length - 1; i++) {
+//     const prevEl = arr[i - 1] || -Infinity;
+//     const currentEl = arr[i];
+//     const nextEl = arr[i + 1];
+//     if (!(prevEl < currentEl && currentEl < nextEl)) {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
+
+// function inAscOrder(arr) {
+//     for(let i = 0; i < arr.length - 1; i++) {
+//         const currentEl = arr[i];
+//         const nextEl = arr[i + 1] || Infinity;
+//       if (currentEl > nextEl) {
+//         return false;
+//       }
+//     }
+//     return true;
+//   }
+
+// console.log("inAscOrder([1, 2, 4, 7, 19]): ", inAscOrder([1, 2, 4, 7, 19, 50]));
+// console.log(
+//   "inAscOrder([1, 6, 10, 18, 2, 4, 20]): ",
+//   inAscOrder([1, 6, 10, 18, 2, 4, 20])
+// );
+// ----------------------------------------------------------------------------------
