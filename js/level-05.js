@@ -225,44 +225,166 @@
 // try not to modify the input list of distances ls
 // in some languages this "list" is in fact a string (see the Sample Tests).
 
-function test(totalRange, ranges, n) {
-  const obj = {};
-  ranges.forEach((element, index) => {
-    console.log("element: ", element);
-    let test = [element];
+// function chooseBestSum(totalRange, n, rangesList) {
+//   let biggestCount = 0;
+//   const recurseTowns = function (townsSoFar, lastIndex) {
+//     townsSoFar = townsSoFar || [];
+//     if (townsSoFar.length === n) {
+//       let sumDistance = townsSoFar.reduce((a, b) => a + b);
+//       if (sumDistance <= totalRange && sumDistance > biggestCount) {
+//         biggestCount = sumDistance;
+//       }
+//       return;
+//     }
+//     for (let i = lastIndex + 1 || 0; i < rangesList.length; i++) {
+//       recurseTowns(townsSoFar.concat(rangesList[i]), i);
+//     }
+//   };
+//   recurseTowns();
 
-    ranges.forEach((el, i) => {
-      console.log("index: ", index);
-      console.log("i: ", i);
-      if (test.length < n && i > index) {
-        console.log("индекс который сработал: ", i);
-        test.push(el);
-      }
-      console.log("test: ", test);
-      if (test.length === n && !(test in obj)) {
-        obj[test] = test.reduce((a, b) => a + b);
-        console.log("obj[test]: ", obj[test]);
-        test = [element];
-      }
-    });
-  });
+//   return biggestCount || null;
+// }
+// console.log(
+//   "test( 167, 3, [50, 55, 56, 57, 58]: ",
+//   chooseBestSum(163, 3, [50, 55, 56, 57, 58])
+// );
 
-  const array = [];
-  for (let range in obj) {
-    array.push([[range], obj[range]]);
-  }
-  console.log("array: ", array);
-  const result = array
-    .filter((el) => el[1] < totalRange)
-    .sort((a, b) => b[1] - a[1]);
+// ----------------------------------------------------------------------
 
-  console.log(" obj: ", obj);
-  console.log("result: ", result);
+// DESCRIPTION:
+// You are given a string containing 0's, 1's and one or more '?', where ? is a wildcard that can be 0 or 1.
+// Return an array containing all the possibilities you can reach substituing the ? for a value.
 
-  return result[0][0];
-}
+// Examples
+// '101?' -> ['1010', '1011']
+// '1?1?' -> ['1010', '1110', '1011', '1111']
 
-console.log(
-  "test( 27, [10, 15, 12, 14], 2): ",
-  test(27, [10, 15, 12, 14, 18], 2)
-);
+// function possibilities(str) {
+//   const result = [];
+//   function normalizer(string) {
+//     if (string.includes("?")) {
+//       let newstr1 = string.replace(/\?/, "0");
+//       let newstr2 = string.replace(/\?/, "1");
+//       normalizer(newstr1);
+//       normalizer(newstr2);
+//     } else {
+//       result.push(string);
+//     }
+//   }
+//   normalizer(str);
+//   return result;
+// }
+
+// console.log("possibilities(1?10): ", possibilities("1?10"));
+// console.log("possibilities(1?1??): ", possibilities("1?1??"));
+
+// ----------------------------------------------------------------------
+
+// DESCRIPTION:
+// Move the first letter of each word to the end of it, then add "ay" to the end of the word. Leave punctuation marks untouched.
+// Examples
+// pigIt('Pig latin is cool'); // igPay atinlay siay oolcay
+// pigIt('Hello world !');     // elloHay orldway !
+
+// function pigIt(str) {
+//   const solution = [];
+//   const arr = str.split(" ");
+//   const test = arr.forEach((el) => {
+//     const array = el.split("");
+//     if (
+//       (array.length === 1 && el === ".") || el === "," || el === "?" || el === "!") {
+//       solution.push(el);
+//     } else {
+//       console.log("array: ", array);
+//       const knife = array.splice(1, array.length - 1);
+//       console.log("knife: ", knife);
+//       console.log("array после ножа: ", array);
+//       solution.push(knife.join("") + array + "ay");
+//     }
+//   });
+//   return solution.join(" ");
+// }
+
+// console.log("pigIt(Pig latin is cool): ", pigIt("Pig latin is cool"));
+// console.log("pigIt(O tempora o mores !): ", pigIt("O tempora o mores !"));
+
+// ----------------------------------------------------------------------
+// Moving Zeros To The End
+// Write an algorithm that takes an array and moves all of the zeros to the end, preserving the order of the other elements.
+
+// moveZeros([false,1,0,1,2,0,1,3,"a"]) // returns[false,1,1,2,1,3,"a",0,0]
+
+// function moveZeros(arr) {
+//   const result = [];
+//   const zeros = [];
+//   arr.forEach((el) => {
+//     if (el !== 0) {
+//       result.push(el);
+//     } else {
+//       zeros.push(el);
+//     }
+//   });
+//   return result.concat(zeros);
+// }
+
+// console.log(
+//   '  moveZeros([false,1,0,1,2,0,1,3,"a"]): ',
+//   moveZeros([false, 1, 0, 1, 2, 0, 1, 3, "a"])
+// );
+
+// ----------------------------------------------------------------------
+
+// First non-repeating character
+// DESCRIPTION:
+// Write a function named first_non_repeating_letter that takes a string input, and returns the first character that is not repeated anywhere in the string.
+// For example, if given the input 'stress', the function should return 't', since the letter t only occurs once in the string, and occurs first in the string.
+// As an added challenge, upper- and lowercase letters are considered the same character, but the function should return the correct case for the initial letter. For example, the input 'sTreSS' should return 'T'.
+// If a string contains all repeating characters, it should return an empty string ("") or None -- see sample tests.
+
+// function firstNonRepeatingLetter(str) {
+//   const arr = str.split("");
+//   const obj = {};
+//   let key;
+//   arr.forEach((el) => {
+//     obj[el] ? (obj[el] += 1) : (obj[el] = 1);
+//   });
+//   for (key in obj) {
+//     if ((key === "," || key === "." || key === "!" || key === "?") && obj[key] === 1) {
+//       return key;
+//     }
+//     let keyLowerLetterCase = key === key.toLowerCase();
+//     let keyUpperLetterCase = key === key.toUpperCase();
+//     let isUpperCaseToo = arr.includes(key.toUpperCase());
+//     let isLowerCaseToo = arr.includes(key.toLowerCase());
+//     if (!((keyLowerLetterCase && isUpperCaseToo) || (keyUpperLetterCase && isLowerCaseToo)) && obj[key] === 1) {
+//       return key;
+//     }
+//   }
+//   return "";
+// }
+
+// function firstNonRepeatingLetter(string) {
+//   let str = string.toLowerCase();
+//   console.log("str: ", str);
+//   for (let i = 0; i < str.length; i++) {
+//     const symbol = str[i];
+//     if (str.indexOf(symbol) === str.lastIndexOf(symbol)) {
+//       return string[i];
+//     }
+//   }
+//   return "";
+// }
+// console.log(
+//   "firstNonRepeatingLetter(moonmenj): ",
+//   firstNonRepeatingLetter("moonmenj")
+// );
+
+// console.log(
+//   "firstNonRepeatingLetter(sTreSS): ",
+//   firstNonRepeatingLetter("sTreSS")
+// );
+// console.log(
+//   "firstNonRepeatingLetter(Go hang a salami, I'm a lasagna hog!): ",
+//   firstNonRepeatingLetter("Go hang a salami, I'm a lasagna hog!")
+// );
+// ----------------------------------------------------------------------
