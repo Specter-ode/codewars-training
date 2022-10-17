@@ -388,3 +388,168 @@
 //   firstNonRepeatingLetter("Go hang a salami, I'm a lasagna hog!")
 // );
 // ----------------------------------------------------------------------
+
+// Product of consecutive Fib numbers
+// The Fibonacci numbers are the numbers in the following integer sequence (Fn):
+// 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, ...
+// such as
+// F(n) = F(n-1) + F(n-2) with F(0) = 0 and F(1) = 1.
+// Given a number, say prod (for product), we search two Fibonacci numbers F(n) and F(n+1) verifying
+// F(n) * F(n+1) = prod.
+// Your function productFib takes an integer (prod) and returns an array:
+// [F(n), F(n+1), true] or {F(n), F(n+1), 1} or (F(n), F(n+1), True)
+// depending on the language if F(n) * F(n+1) = prod.
+// If you don't find two consecutive F(n) verifying F(n) * F(n+1) = prodyou will return
+// [F(n), F(n+1), false] or {F(n), F(n+1), 0} or (F(n), F(n+1), False)
+// F(n) being the smallest one such as F(n) * F(n+1) > prod.
+// Some Examples of Return:
+// (depend on the language)
+// productFib(714) # should return (21, 34, true),
+//                 # since F(8) = 21, F(9) = 34 and 714 = 21 * 34
+// productFib(800) # should return (34, 55, false),
+//                 # since F(8) = 21, F(9) = 34, F(10) = 55 and 21 * 34 < 800 < 34 * 55
+// -----
+// productFib(714) # should return [21, 34, true],
+// productFib(800) # should return [34, 55, false],
+// -----
+
+// function fibonachi(n) {
+//   if (n < 0) {
+//     return 0;
+//   }
+//   if (n <= 2) {
+//     return 1;
+//   }
+//   return fibonachi(n - 1) + fibonachi(n - 2);
+// }
+
+// function productFib(number) {
+//   for (let i = 0; i < number; i++) {
+//     if (fibonachi(i) * fibonachi(i + 1) === number) {
+//       return [fibonachi(i), fibonachi(i + 1), true];
+//     }
+//     if (fibonachi(i) * fibonachi(i + 1) > number) {
+//       return [fibonachi(i), fibonachi(i + 1), false];
+//     }
+//   }
+// }
+// console.log("productFib(714);: ", productFib(714));
+// console.log("productFib(800);: ", productFib(1600));
+
+// ----------------------------------------------------------------------
+// Weight for weight
+// My friend John and I are members of the "Fat to Fit Club (FFC)". John is worried because each month a list with the weights of members is published and each month he is the last on the list which means he is the heaviest.
+// I am the one who establishes the list so I told him: "Don't worry any more, I will modify the order of the list". It was decided to attribute a "weight" to numbers. The weight of a number will be from now on the sum of its digits.
+// For example 99 will have "weight" 18, 100 will have "weight" 1 so in the list 100 will come before 99.
+// Given a string with the weights of FFC members in normal order can you give this string ordered by "weights" of these numbers?
+// When two numbers have the same "weight", let us class them as if they were strings (alphabetical ordering) and not numbers:
+// 180 is before 90 since, having the same "weight" (9), it comes before as a string.
+// All numbers in the list are positive numbers and the list can be empty.
+// Example:
+// "56 65 74 100 99 68 86 180 90" ordered by numbers weights becomes: "100 180 90 56 65 74 68 86 99"
+
+// function orderWeight(str) {
+//   const newArr = str.split(" ").map((weight) => {
+//     const newTypeOfWeight = weight
+//       .split("")
+//       .reduce((acc, number) => acc + Number(number), 0);
+//     return [weight, newTypeOfWeight];
+//   });
+//   const result = newArr
+//     .sort((a, b) => {
+//       if (a[1] === b[1]) {
+//         return a[0].localeCompare(b[0]);
+//       } else {
+//         return a[1] - b[1];
+//       }
+//     })
+//     .map((el) => el[0])
+//     .join(" ");
+//   return result;
+// }
+
+// console.log(
+//   'orderWeight("2000 10003 1234000 44444444 9999 11 11 22 123"): ',
+//   orderWeight("2000 10003 1234000 44444444 9999 11 11 22 123")
+// );
+// console.log(
+//   ' orderWeight("56 65 74 100 99 68 86 180 90"): ',
+//   orderWeight("56 65 74 100 99 68 86 180 90")
+// );
+// ----------------------------------------------------------------------
+
+// Array.diff hero
+// DESCRIPTION:
+// You know about simple Array.diff task. Now try to solve enhanced version!
+// Your goal in this kata is to implement a difference function, which subtracts one list from another.
+// It should remove all values from list a, which are present in list b. Each element x in both arrays is integer and 0 ≤ x ≤ 25. And lengths of arrays can reach 5 000 000 elements.
+// arrayDiffVeryFast([1,2],[1]) == [2]
+// If a value is present in b, all of its occurrences must be removed from another:
+// arrayDiffVeryFast([1,2,2,2,3],[2]) == [1,3]
+
+function arrayDiffVeryFast(arr, arrToCompare) {
+  const result = [];
+  arr.forEach((element) => {
+    let status = true;
+    arrToCompare.forEach((testEl) => {
+      if (element === testEl) {
+        status = false;
+      }
+    });
+    if (status) {
+      result.push(element);
+    }
+  });
+  return result;
+}
+
+// function arrayDiffVeryFast(arr, arrToCompare) {
+//   return arr.filter((value) => !arrToCompare.includes(value));
+// }
+
+// ----------------------------------------------------------------------
+
+// function isMerge(s, part1, part2) {
+//   if (s.length !== part1.length + part2.length) return false;
+//   if (!s.length) return true;
+//   const word = s
+//     .split("")
+//     .sort((a, b) => a.localeCompare(b))
+//     .join("");
+//   const symbols = (part1 + part2)
+//     .split("")
+//     .sort((a, b) => a.localeCompare(b))
+//     .join("");
+//   return word === symbols;
+// }
+
+function isMerge(s, part1, part2) {
+  if (s.length !== part1.length + part2.length) {
+    return false;
+  }
+  if (!s.length) {
+    return false;
+  }
+
+  if (part1[0] === s[0] && isMerge(s.slice(1), part1.slice(1), part2)) {
+    return true;
+  }
+
+  if (part2[0] === s[0] && isMerge(s.slice(1), part1, part2.slice(1))) {
+    return true;
+  }
+  return false;
+}
+
+console.log(
+  'isMerge("dewars", "dwr", "eas"): ',
+  isMerge("codewars", "cdwr", "oeas")
+);
+console.log(
+  'isMerge("codewars", "code", "ckde"): ',
+  isMerge("codewars", "code", "ckde")
+);
+console.log(
+  'isMerge("Making progress", "Mak pross", "inggre"): ',
+  isMerge("Making progress", "Mak pross", "inggre")
+);
