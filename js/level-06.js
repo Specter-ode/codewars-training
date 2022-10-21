@@ -295,3 +295,50 @@
 
 // console.log('solution("camelCasing"): ', solution("camelCasingTest"));
 // console.log('solution("caMelCaSingTest"): ', solution("caMelCaSingTest"));
+
+// ----------------------------------------------------------------------------------
+// IP Validation
+// Write an algorithm that will identify valid IPv4 addresses in dot-decimal format. IPs should be considered valid if they consist of four octets, with values between 0 and 255, inclusive.
+// Valid inputs examples:
+// Examples of valid inputs:
+// 1.2.3.4
+// 123.45.67.89
+// Invalid input examples:
+// 1.2.3
+// 1.2.3.4.5
+// 123.456.78.90
+// 123.045.067.089
+// Notes:
+// Leading zeros (e.g. 01.02.03.04) are considered invalid
+// Inputs are guaranteed to be a single string
+
+function isValidIP(str) {
+  const arr = str.split(".");
+  if (arr.length !== 4) {
+    return false;
+  }
+  for (let i = 0; i < arr.length; i++) {
+    const el = arr[i];
+    if (el.length < 1 || el.length > 3 || el < 0 || el > 255) {
+      return false;
+    }
+    const symbols = el.split("");
+    for (let j = 0; j <= symbols.length - 1; j++) {
+      if (symbols[j] !== "0" && !Number(symbols[j])) {
+        return false;
+      }
+      if (
+        symbols[0] === "0" &&
+        (symbols.length === 2 || symbols.length === 3)
+      ) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+console.log('(isValidIP("101.183..218: ', isValidIP("1e1.183..218"));
+console.log('(isValidIP("208.99.86.28"): ', isValidIP("208.99.86.28"));
+console.log('isValidIP("01.01.02.04"): ', isValidIP("01.01.02.04"));
+console.log('isValidIP("201.201.201.201"): ', isValidIP("e01.201.201.201"));
