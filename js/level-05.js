@@ -1285,3 +1285,66 @@
 //   ])
 // ); // "Finished!"
 // ----------------------------------------------------------------------
+
+// Is my friend cheating?
+// A friend of mine takes the sequence of all numbers from 1 to n (where n > 0).
+// Within that sequence, he chooses two numbers, a and b.
+// He says that the product of a and b should be equal to the sum of all numbers in the sequence, excluding a and b.
+// Given a number n, could you tell me the numbers he excluded from the sequence?
+// The function takes the parameter: n (n is always strictly greater than 0) and returns an array or a string (depending on the language) of the form:
+
+// [(a, b), ...] or [[a, b], ...] or {{a, b}, ...} or or [{a, b}, ...]
+// with all (a, b) which are the possible removed numbers in the sequence 1 to n.
+// [(a, b), ...] or [[a, b], ...] or {{a, b}, ...} or ... will be sorted in increasing order of the "a".
+// It happens that there are several possible (a, b). The function returns an empty array (or an empty string) if no possible numbers are found which will prove that my friend has not told the truth! (Go: in this case return nil)
+
+// function removeNb(n) {
+//   const arr = [];
+//   const result = [];
+//   let number = 0;
+//   let totalSum = 0;
+//   while (number < n) {
+//     number++;
+//     arr.push(number);
+//     totalSum += number;
+//   }
+//   let sum = 0;
+//   for (let i = 0; i < arr.length; i++) {
+//     const el = arr[i];
+//     for (let j = 0; j < arr.length; j++) {
+//       if (el !== arr[j]) {
+//         sum = totalSum - el - arr[j];
+//         if (el * arr[j] === sum) {
+//           result.push([el, arr[j]]);
+//         }
+//       }
+//     }
+//   }
+//   return result;
+// }
+
+// best variant
+
+// function removeNb(n) {
+//   const result = [];
+//   const sum = (n * (n + 1)) / 2;
+//   for (let b = n; b > 0; b--) {
+//     // a * b = sum - a - b
+//     // a * b + 1 = sum - b
+//     // a * b + a * 1 = sum - b
+//     // a(b + 1) = sum - b
+//     const a = (sum - b) / (b + 1);
+//     if (a > b) break; // this line reduce the number of unnecessary iterations
+//     if (a < n && Number.isInteger(a)) {
+//       result.push([a, b]);
+//     }
+//   }
+//   [...result].reverse().forEach((el) => {
+//     result.push([...el].reverse());
+//   });
+//   return result;
+// }
+// console.log("removeNb(100): ", removeNb(100)); // return [];
+// console.log("removeNb(26): ", removeNb(26)); //return [15,21], [21, 15]
+// console.log("removeNb(1000003): ", removeNb(1000003)); // [550320, 908566], [559756, 893250], [893250, 559756], [908566, 550320]
+// ----------------------------------------------------------------------
