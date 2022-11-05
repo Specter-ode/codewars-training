@@ -49,8 +49,6 @@
 // // must return 0
 // cakes({apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100}, {sugar: 500, flour: 2000, milk: 2000});
 
-// ----------------------------------------------------------------------------------
-
 // function cakes(recipe, available) {
 //   let availableIngredient = Object.keys(available);
 //   let recipeIngredient = Object.keys(recipe);
@@ -1417,41 +1415,94 @@
 // [4] => 1 is counted out and goes into the result [3,6,2,7,5,1]
 // [] => 4 is counted out and goes into the result [3,6,2,7,5,1,
 
-function josephus(items, step) {
-  const result = [];
-  let i = 0;
-  let k = 1;
-  if (items.length < 1) return items;
-  while (items.length !== 1) {
-    if (k === step && i === items.length - 1) {
-      result.push(items[i]);
-      items.splice(i, 1);
-      i = 0;
-      k = 1;
-    } else if (k === step && i != items.length - 1) {
-      result.push(items[i]);
-      items.splice(i, 1);
-      k = 1;
-    } else if (k < step && i === items.length - 1) {
-      k++;
-      i = 0;
-    } else if (k < step && i !== items.length - 1) {
-      k++;
-      i++;
-    }
-  }
-  result.push(items[0]);
-  return result;
-}
+// function josephus(items, step) {
+//   const result = [];
+//   let i = 0;
+//   let k = 1;
+//   if (items.length < 1) return items;
+//   while (items.length !== 1) {
+//     if (k === step && i === items.length - 1) {
+//       result.push(items[i]);
+//       items.splice(i, 1);
+//       i = 0;
+//       k = 1;
+//     } else if (k === step && i != items.length - 1) {
+//       result.push(items[i]);
+//       items.splice(i, 1);
+//       k = 1;
+//     } else if (k < step && i === items.length - 1) {
+//       k++;
+//       i = 0;
+//     } else if (k < step && i !== items.length - 1) {
+//       k++;
+//       i++;
+//     }
+//   }
+//   result.push(items[0]);
+//   return result;
+// }
 // console.log(
 //   "josephus([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 2): ",
 //   josephus([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 2)
 // );
-console.log(
-  'josephus (["C", "o", "d", "e", "W", "a", "r", "s"], 4): ',
-  josephus(["C", "o", "d", "e", "W", "a", "r", "s"], 4)
-); //['e', 's', 'W', 'o', 'C', 'd', 'r', 'a'])
+// console.log(
+//   'josephus (["C", "o", "d", "e", "W", "a", "r", "s"], 4): ',
+//   josephus(["C", "o", "d", "e", "W", "a", "r", "s"], 4)
+// ); //['e', 's', 'W', 'o', 'C', 'd', 'r', 'a'])
 // console.log(
 //   "josephus ([ 1, 2, 3, 4, 5, 6, 7 ], 3): ",
 //   josephus([1, 2, 3, 4, 5, 6, 7], 3)
 // );
+
+// ----------------------------------------------------------------------
+// A perfect power is a classification of positive integers:
+// In mathematics, a perfect power is a positive integer that can be expressed as an integer power of another positive integer. More formally, n is a perfect power if there exist natural numbers m > 1, and k > 1 such that mk = n.
+// Your task is to check wheter a given integer is a perfect power. If it is a perfect power, return a pair m and k with mk = n as a proof. Otherwise return Nothing, Nil, null, NULL, None or your language's equivalent.
+// Note: For a perfect power, there might be several pairs. For example 81 = 3^4 = 9^2, so (3,4) and (9,2) are valid solutions. However, the tests take care of this, so if a number is a perfect power, return any pair that proves it.
+// DESCRIPTION: Examples;
+// Test.describe("perfect powers", function () {
+//   Test.it("should work for some examples", function () {
+//     Test.assertSimilar(isPP(4), [2, 2], "4 = 2^2");
+//     Test.assertSimilar(isPP(9), [3, 2], "9 = 3^2");
+//     Test.assertEquals(isPP(5), null, "5 isn't a perfect number");
+//   });
+// });
+
+// const isPP = (n) => {
+//   const res = [];
+//   for (let i = 2; i < n; i++) {
+//     for (let j = 0; j < n; j++) {
+//       const el = Math.pow(i, j);
+//       if (el === n) {
+//         res.push(i);
+//         res.push(j);
+//         break;
+//       } else if (el > n) {
+//         break;
+//       }
+//     }
+//   }
+//   if (res.length === 0) return null;
+//   return res;
+// };
+
+// const isPP = (n) => {
+//   const res = [];
+//   let base = 2;
+//   while (base < n) {
+//     const exponent = Math.floor(Math.log(n + base) / Math.log(base));
+//     const power = Math.pow(base, exponent);
+//     if (exponent === 1) break;
+//     if (power === n) {
+//       res.push(base);
+//       res.push(exponent);
+//     }
+//     base++;
+//   }
+//   if (res.length === 0) return null;
+//   return res;
+// };
+
+// console.log("(isPP(9), [3, 2]): ", isPP(9));
+// console.log("(isPP(81), [3, 4], [9,2]): ", isPP(81));
+// ----------------------------------------------------------------------
